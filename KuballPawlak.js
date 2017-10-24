@@ -2,6 +2,8 @@
 
 /*
 Your program will return one of the four following things:
+
+
 1) the mp3 file they asked for (a song)
 2) the jpg file they asked for (album art)
 3) an HTML file denoting an error.
@@ -31,3 +33,19 @@ characters, the digits 0-9 and the _ (underscore), then
 a . (period) and the extension "jpg" or "mp3".*/
 
 //3. call 3 separate functions (giveAdvert(), giveJPG(), giveMP3())
+
+
+
+
+
+
+var songreg = /([\w]+)".mp3"/
+var imgreg = /([\w]+)".jpg"/
+
+
+//incorrect file names, extensions will be caught in this regex-test
+
+
+if( !(songreg.test(THEURLSTUFF)) || !(imgreg.test(THEURLSTUFF)) ){
+
+}
