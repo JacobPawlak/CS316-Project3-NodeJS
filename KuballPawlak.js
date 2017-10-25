@@ -39,8 +39,8 @@ a . (period) and the extension "jpg" or "mp3".*/
 
 
 
-var songreg = /([\w]+)".mp3"/
-var imgreg = /([\w]+)".jpg"/
+var songreg = /\/([\w]+)\.mp3$/
+var imgreg = /\/([\w]+)\.jpg$/
 
 
 //incorrect file names, extensions will be caught in this regex-test
