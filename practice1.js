@@ -1,20 +1,27 @@
 var http = require("http"),
 	url = require('url');
 
-const hostname = 'iris.cs.uky.edu';
-const port = 3332;
+const hostname = 'localhost';
+var port = 3344;
 //add STARTPORT and ENDPORT
 const STARTPORT = 2000;
 const ENDPORT = 30000;
 //choose random number between STARTPORT and ENDPORT to be port number
+
+
+//	port = Math.floor(Math.random() * ENDPORT) + STARTPORT
+
+
 
 var server = http.createServer(function(request, response) {
 	var xurl = request.url;
 	response.statusCode = 200;
 	response.setHeader('Content-Type', 'text/plain');
 	response.end('You requested the following URL: '+xurl+'\n');
-	var songreg = //[\w]+".mp3"/;
-	var imgreg = //[\w]+".jpg"/;
+
+	var songreg = /\/([\w]+)\.mp3$/
+	var imgreg = /\/([\w]+)\.jpg$/
+
 	if(songreg.test(xurl)){
 		console.log("requested song");
 		//call file test function
