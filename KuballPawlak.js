@@ -44,9 +44,11 @@ var songreg = /\/([\w]+)\.mp3$/
 var imgreg = /\/([\w]+)\.jpg$/
 
 
+console.log(songreg.test("/eatmyshorts.mp3"));
+
 //incorrect file names, extensions will be caught in this regex-test
 
 
-if( !(songreg.test(THEURLSTUFF)) || !(imgreg.test(THEURLSTUFF)) ){
+//if( !(songreg.test(THEURLSTUFF)) || !(imgreg.test(THEURLSTUFF)) ){
 
-}
+//}
