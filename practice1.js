@@ -7,12 +7,13 @@ var http = require("http"),
 	url = require('url');
 
 const hostname = 'localhost';
-var port = 3344;
+var port = 2000;
 //add STARTPORT and ENDPORT
 const STARTPORT = 2000;
 const ENDPORT = 30000;
-//choose random number between STARTPORT and ENDPORT to be port number
 
+
+//choose random number between STARTPORT and ENDPORT to be port number
 if( (ENDPORT - STARTPORT) > 0){
 
 	port = Math.floor(Math.random() * ENDPORT) + 1024;
@@ -20,15 +21,21 @@ if( (ENDPORT - STARTPORT) > 0){
 else{
 	port = STARTPORT;
 }
+//
 
 
+//start the server up on the random port at our hostname
 var server = http.createServer(function(request, response) {
 	var xurl = request.url;
 	response.statusCode = 200;
 	response.setHeader('Content-Type', 'text/plain');
 	response.end('You requested the following URL: '+xurl+'\n');
 
+	//regex for songs, should match anything in the form of
+	//	'/'FILENAME'.'mp3
 	var songreg = /\/([\w]+)\.mp3$/
+	//regex for images, should match anything in the form of
+	//	'/'FILENAME'.'jpg
 	var imgreg = /\/([\w]+)\.jpg$/
 
 	console.log(xurl);
