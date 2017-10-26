@@ -1,3 +1,8 @@
+//Chelsea Kuball and Jacob Pawlak
+//CS316 Program 3 - Xelkster
+//October 26th, 2017
+
+
 var http = require("http"),
 	url = require('url');
 
@@ -8,9 +13,13 @@ const STARTPORT = 2000;
 const ENDPORT = 30000;
 //choose random number between STARTPORT and ENDPORT to be port number
 
+if( (ENDPORT - STARTPORT) > 0){
 
-//	port = Math.floor(Math.random() * ENDPORT) + STARTPORT
-
+	port = Math.floor(Math.random() * ENDPORT) + 1024;
+}
+else{
+	port = STARTPORT;
+}
 
 
 var server = http.createServer(function(request, response) {
@@ -22,6 +31,8 @@ var server = http.createServer(function(request, response) {
 	var songreg = /\/([\w]+)\.mp3$/
 	var imgreg = /\/([\w]+)\.jpg$/
 
+	console.log(xurl);
+
 	if(songreg.test(xurl)){
 		console.log("requested song");
 		//call file test function
@@ -32,10 +43,10 @@ var server = http.createServer(function(request, response) {
 		//call file test function
 		//call giveJPG
 	}
-	else{
+	else {
 		console.log("bad url.");
-		//throw some error message here
 	}
+
 
 });
 
