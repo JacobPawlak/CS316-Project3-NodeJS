@@ -39,8 +39,16 @@ var http = require("http"),
 
 const port = 5000;
 
+<<<<<<< HEAD
 var songreg = /([\w]+)".mp3"/;
 var imgreg = /([\w]+)".jpg"/;
+=======
+
+
+
+var songreg = /\/([\w]+)\.mp3$/
+var imgreg = /\/([\w]+)\.jpg$/
+>>>>>>> b466dcf6b589cb092204e13b283cb422f8c5a0c4
 
 
 //incorrect file names, extensions will be caught in this regex-test
