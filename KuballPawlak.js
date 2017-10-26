@@ -34,13 +34,13 @@ a . (period) and the extension "jpg" or "mp3".*/
 
 //3. call 3 separate functions (giveAdvert(), giveJPG(), giveMP3())
 
+var http = require("http"), 
+	url = require("url");
 
+const port = 5000;
 
-
-
-
-var songreg = /([\w]+)".mp3"/
-var imgreg = /([\w]+)".jpg"/
+var songreg = /([\w]+)".mp3"/;
+var imgreg = /([\w]+)".jpg"/;
 
 
 //incorrect file names, extensions will be caught in this regex-test
