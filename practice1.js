@@ -6,7 +6,7 @@
 var http = require("http"),
 	url = require('url');
 
-const hostname = 'localhost';
+const hostname = 'violet.cs.uky.edu';
 var port = 2000;
 //add STARTPORT and ENDPORT
 const STARTPORT = 2000;
