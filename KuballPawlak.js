@@ -12,43 +12,115 @@ Your program will return one of the four following things:
 5) 33% of the time, your program will return file file "advert.jpg",
 instead of the requested mp3/jpg file they requested.
 */
-
-//1. call http.createServer(serveURL)
-//2. implement serveURL()
-/*3.The http object requires a call to the listen() method. Your
-program shall call this with at least one option, a port number.
-The port number shall be a random number between 
-STARTPORT and ENDPORT inclusive. (STARTPORT and ENDPORT will be defined constants at the top of your program. You should use them as 2000 and 30000)
-*/
-//4. output to the console, the url uses including port: 
-//"Server started. Listing on http://bel.cs.uky.edu:7876"
+//Chelsea Kuball and Jacob Pawlak
+//CS316 Program 3 - Xelkster
+//October 26th, 2017
 
 
-//serveURL() 
-//1. output to the console the URL requested
+var http = require("http"),
+	fs = require("fs"),
+	url = require('url');
 
-/*2. use a regular expression to make sure the URL
-requested only contains the upper and lower case
-characters, the digits 0-9 and the _ (underscore), then
-a . (period) and the extension "jpg" or "mp3".*/
+//const hostname = 'localhost';
+const hostname = 'iris.cs.uky.edu';
+var port = 3344;
+//const hostname = 'violet.cs.uky.edu';
+//var port = 2000;
 
-//3. call 3 separate functions (giveAdvert(), giveJPG(), giveMP3())
-
-var http = require("http"), 
-	url = require("url");
-
-const port = 5000;
-
-
-var songreg = /\/([\w]+)\.mp3$/
-var imgreg = /\/([\w]+)\.jpg$/
+//add STARTPORT and ENDPORT
+const STARTPORT = 2000;
+const ENDPORT = 30000;
 
 
-console.log(songreg.test("/eatmyshorts.mp3"));
+//choose random number between STARTPORT and ENDPORT to be port number
+if( (ENDPORT - STARTPORT) > 0){
 
-//incorrect file names, extensions will be caught in this regex-test
+	port = Math.floor(Math.random() * ENDPORT) + 1024;
+}
+else{
+	port = STARTPORT;
+}
+//
 
 
-//if( !(songreg.test(THEURLSTUFF)) || !(imgreg.test(THEURLSTUFF)) ){
+//start the server up on the random port at our hostname
 
-//}
+var server = http.createServer(function(request, response) {
+	var xurl = url.parse(request.url,true);
+	var filename = "." + xurl.pathname;
+	var advert = "./somepicture.jpg";
+	var rand_num = Math.random();
+	console.log('You requested the following URL: '+request.url);
+	//console.log(rand_num);
+	response.statusCode = 200;
+	//response.setHeader('Content-Type', 'text/plain');
+	//regex for songs, should match anything in the form of
+	//	'/'FILENAME'.'mp3
+	var songreg = /\/([\w]+)\.mp3$/
+	//regex for images, should match anything in the form of
+	//	'/'FILENAME'.'jpg
+	var imgreg = /\/([\w]+)\.jpg$/
+	if(rand_num< (1/3)){
+		console.log("sending advert.jpg");
+		giveAdvert(advert,response);
+	}
+	else{
+		if(songreg.test(filename)){
+			console.log("requested song");
+			//call file test function
+			//call giveMP3()
+			giveMP3(filename,response);
+		}
+		else if(imgreg.test(filename)){
+			console.log("requested image:");
+			console.log(filename);
+			//call file test function
+			//call giveJPG
+			giveJPG(filename,response);
+		}
+		else{
+			console.log("bad url.");
+			//throw some error message here
+		}
+	}
+
+});
+
+server.listen(port, hostname, function() {
+	console.log('Server started. Listening on http://'+ hostname +':'+ port +'/');
+	console.log('Waiting for a file request...');
+});
+
+function giveJPG(requested_file,response){
+	fs.readFile(requested_file, function(err,data){
+		if (err) {
+			response.writeHead(404, {'Content-Type': 'text/html'});
+			return response.end("404 Not Found");
+		}
+		response.writeHead(200, {'Content-Type': 'image/jpeg'});
+		response.write(data);
+		return response.end();
+	});
+}
+function giveMP3(requested_file, response){
+	fs.readFile(requested_file, function(err,data){
+		if(err){
+			response.writeHead(404, {'Content-Type': 'text/html'});
+			return response.end("404 Not Found");
+		}
+		response.writeHead(200, {'Content-Type' : 'audio/mpeg3'});
+		response.write(data);
+		return response.end();
+	});
+}
+function giveAdvert(advert, response){
+		fs.readFile(advert, function(err,data){
+		if(err){
+			response.writeHead(404, {'Content-Type' : 'text/html'});
+			return response.end("404 Not Found");
+		}
+		response.writeHead(200, {'Content-Type' : 'image/jpeg'});
+		response.write(data);
+		return response.end();
+	});
+}
