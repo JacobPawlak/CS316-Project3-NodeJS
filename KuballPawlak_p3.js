@@ -116,7 +116,7 @@ function giveJPG(requested_file,response){
 		//if you dont find it, throw an error
 		if (err) {
 			response.writeHead(404, {'Content-Type': 'text/html'});
-			return response.end("<strong><h1>404, the file you were looking for was not found</h1></strong>");
+			return response.end("<strong><h1>403, the file you were looking for was not found</h1></strong>");
 		}
 		//if you find it, put it on the screen
 		response.writeHead(200, {'Content-Type': 'image/jpeg'});
@@ -132,7 +132,7 @@ function giveMP3(requested_file, response){
 		//if you dont find it, throw an error
 		if(err){
 			response.writeHead(404, {'Content-Type': 'text/html'});
-			return response.end("<strong><h1>404, the file you were looking for was not found</h1></strong>");
+			return response.end("<strong><h1>403, the file you were looking for was not found</h1></strong>");
 		}
 		//if you find it, let the user download it
 		response.writeHead(200, {'Content-Type' : 'audio/mpeg3'});
@@ -148,7 +148,7 @@ function giveAdvert(advert, response){
 		//if the advert file doesnt exist, throw an error
 		if(err){
 			response.writeHead(404, {'Content-Type' : 'text/html'});
-			return response.end("<strong><h1>404, the file you were looking for was not found</h1></strong>");
+			return response.end("<strong><h1>403, the file you were looking for was not found</h1></strong>");
 		}
 		//if its there, show it to the user
 		response.writeHead(200, {'Content-Type' : 'image/jpeg'});
