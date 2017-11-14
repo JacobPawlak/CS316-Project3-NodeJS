@@ -26,15 +26,15 @@ const hostname = 'violet.cs.uky.edu';
 var port = 3344;
 
 //add STARTPORT and ENDPORT
-const STARTPORT = 2000;
-const ENDPORT = 30000;
+const STARTPORT = 8888;
+const ENDPORT = 8889;
 
 
 //choose random number between STARTPORT and ENDPORT to be port number
 if( (ENDPORT - STARTPORT) > 0){
 
 	//set the port number to a random number starting at 1024
-	port = Math.floor(Math.random() * ENDPORT) + 1024;
+	port = Math.floor(Math.random() * (ENDPORT - STARTPORT) + STARTPORT);
 }
 else{
 	//if the numbers are the same, or the starting number is larger
